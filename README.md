@@ -1,51 +1,56 @@
-# EduReach — College Chatbot
+ # EduReach — Agentic College Chatbot
 
-A full-stack web app I built to help students get instant answers about a college — courses, fees, admissions, placements — without digging through 10 different pages.
+A full-stack AI web app where students can chat with a bot or get an actual phone call from an AI counselor to learn about a college — fees, courses, admissions, placements — instantly, without hunting through pages.
 
-**Demo Video:** https://github.com/user-attachments/assets/8196ac38-de07-4f96-8107-0153bf246c08
+**Live:** https://your-deployment-link.com  
+**Repo:** https://github.com/yandamurividyasagar-dev/EduReachCollegeChatBot
 
-**Live:** https://your-deployment-link.com
+## Demo
 
----
-
-## Why I Built This
-
-Every college website I've visited has the same problem — the information is there somewhere, but finding it is painful. You either call the office (which is closed), email them (and wait 3 days), or give up.
-
-I wanted to build something where a student could just ask "what's the fee for B.Tech CSE?" and get an accurate answer instantly. That's EduReach.
+https://github.com/user-attachments/assets/8196ac38-de07-4f96-8107-0153bf246c08
 
 ---
 
-## What It Does
+## The Problem I Was Solving
 
-There are two main AI features:
+College websites are overwhelming. Students waste time clicking through dozens of pages just to find a fee structure or admission deadline. I wanted to fix that with a single conversational interface that knows everything about the college.
 
-**Chat with the bot** — Ask anything about the college. The bot searches a knowledge base I created with all the college info (fees, courses, placements, hostel details, etc.) and gives you a grounded answer. It doesn't hallucinate because it's pulling from real data, not making things up.
+---
 
-**Talk to an AI counselor** — You fill in your phone number and what you want to know, and "Ava" (an AI voice agent) actually calls you on your phone and has a real conversation with you. This uses Vapi under the hood.
+## Key Features
 
-Both features are gated behind login — visitors can browse the homepage but need an account to access the AI features.
+**AI Chat (RAG-based)**  
+Students type a question — the bot searches a custom knowledge base I built with all the college data, pulls the most relevant chunks, and generates an accurate answer using LLaMA 3.3 70B. No hallucinations because it only answers from real data.
+
+**AI Voice Counselor (Vapi)**  
+Students enter their phone number and topic. An AI agent called "Ava" literally calls them and has a real phone conversation about the college. Built with Vapi's outbound calling API.
+
+**Auth-gated access**  
+Visitors can browse the homepage. Chat and voice features unlock after signup — handled with JWT on the backend and an Axios interceptor on the frontend.
 
 ---
 
 ## Tech Stack
 
-**Backend** — Node.js, Express, TypeScript, MongoDB Atlas, Groq (LLaMA 3.3 70B), LangChain, JWT, Vapi
-
-**Frontend** — React, TypeScript, Vite, Tailwind CSS, Axios, React Router
+| Side | Stack |
+|---|---|
+| Frontend | React, TypeScript, Vite, Tailwind CSS v4, React Router, Axios |
+| Backend | Node.js, Express, TypeScript |
+| Database | MongoDB Atlas |
+| AI | Groq API (LLaMA 3.3 70B), LangChain (RAG pipeline) |
+| Voice | Vapi (outbound AI calls) |
+| Auth | JWT, bcryptjs |
 
 ---
 
-## How the AI Chat Works (RAG)
+## How RAG Works Here
 
-The bot uses RAG (Retrieval-Augmented Generation). Here's the basic idea:
+```
+server startup  →  load knowledge .txt  →  split into chunks  →  store in MongoDB
+user question   →  find top 3 chunks   →  send to LLaMA     →  return answer
+```
 
-1. I wrote a text file with all the college info
-2. When the server starts, it splits that file into chunks and stores them in MongoDB
-3. When a student asks a question, it finds the 3 most relevant chunks and sends them along with the question to LLaMA
-4. LLaMA generates an answer based on that context
-
-This way the bot only answers from actual college data — no hallucinations.
+I wrote the college knowledge base as a plain text file. LangChain handles splitting it and storing chunks. On every chat message, it finds the most relevant chunks and passes them as context to the LLM — so answers are always grounded in real data.
 
 ---
 
@@ -53,16 +58,14 @@ This way the bot only answers from actual college data — no hallucinations.
 
 ```bash
 git clone https://github.com/yandamurividyasagar-dev/EduReachCollegeChatBot.git
-cd EduReachCollegeChatBot
 ```
 
-**Backend:**
+**Backend**
 ```bash
-cd server
-npm install
+cd server && npm install
 ```
 
-Create `server/.env`:
+`server/.env`
 ```
 PORT=5000
 MONGODB_URI=your_mongodb_uri
@@ -79,59 +82,33 @@ VAPI_PHONE_NUMBER_ID=your_phone_number_id
 npm run dev
 ```
 
-**Frontend:**
+**Frontend**
 ```bash
-cd ../client
-npm install
-npm run dev
+cd client && npm install && npm run dev
 ```
 
-Open `http://localhost:5173`
+Visit `http://localhost:5173`
 
 ---
 
-## Project Structure
+## API Endpoints
 
-```
-EduReachCollegeChatBot/
-├── client/
-│   └── src/
-│       ├── components/     # All UI components
-│       ├── pages/          # HomePage, LoginPage, SignupPage
-│       ├── context/        # AuthContext
-│       ├── services/       # API calls
-│       └── data/           # Static content
-│
-└── server/
-    ├── knowledge-base/     # College info text file
-    └── src/
-        ├── controllers/    # auth, chat, vapi
-        ├── services/       # rag.service, vapi.service
-        ├── middleware/     # auth middleware
-        ├── models/         # User model
-        └── routes/         # auth, chat, vapi routes
-```
-
----
-
-## API Routes
-
-| Method | Route | Auth | What it does |
-|--------|-------|------|--------------|
-| POST | `/api/auth/register` | No | Create account |
-| POST | `/api/auth/login` | No | Login |
-| GET | `/api/auth/me` | Yes | Get current user |
-| POST | `/api/chat/message` | No | Send chat message |
+| Method | Endpoint | Auth | Purpose |
+|---|---|---|---|
+| POST | `/api/auth/register` | No | Sign up |
+| POST | `/api/auth/login` | No | Log in |
+| GET | `/api/auth/me` | Yes | Get user profile |
+| POST | `/api/chat/message` | No | Chat with AI |
 | POST | `/api/vapi/call` | Yes | Start AI voice call |
 
 ---
 
-## Things I Learned Building This
+## What I Picked Up
 
-- RAG is genuinely useful when you need an AI to answer from your own data instead of hallucinating
-- Embedding models and vector search are simpler to use than I expected once you understand the concept
-- Building voice AI features (Vapi) is surprisingly straightforward — most of the complexity is in the UX, not the integration
-- JWT auth across frontend and backend requires careful handling of token storage and interceptors
+- How RAG actually works end-to-end — not just the theory but building the full pipeline from text file to chat response
+- Why vector search makes sense for this kind of problem and how to set it up on MongoDB Atlas
+- Integrating a voice AI API and handling the different call states in the UI (form → calling → done → error)
+- Managing auth state across a React app with context, interceptors, and protected routes
 
 ---
 
