@@ -1,312 +1,138 @@
-# 🎓 EduReach — Agentic College Chatbot
+# EduReach — College Chatbot
 
-<div align="center">
+A full-stack web app I built to help students get instant answers about a college — courses, fees, admissions, placements — without digging through 10 different pages.
 
-![EduReach Banner](https://res.cloudinary.com/dpvbaiyus/image/upload/v1772014920/campus_lnna9a.avif)
+**Demo Video:** https://github.com/user-attachments/assets/8196ac38-de07-4f96-8107-0153bf246c08
 
-**Your Gateway to Smarter Education Decisions**
-
-[![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-Visit_Site-7B1E2B?style=for-the-badge)](https://your-deployment-link.com)
-[![Demo Video](https://img.shields.io/badge/▶_Demo_Video-Watch_Now-FF0000?style=for-the-badge)](https://github.com/user-attachments/assets/8196ac38-de07-4f96-8107-0153bf246c08)
-[![GitHub](https://img.shields.io/badge/GitHub-Source_Code-181717?style=for-the-badge&logo=github)](https://github.com/yandamurividyasagar-dev/EduReachCollegeChatBot)
-
-![Node.js](https://img.shields.io/badge/Node.js-v25-339933?style=flat-square&logo=node.js)
-![React](https://img.shields.io/badge/React-18-61DAFB?style=flat-square&logo=react)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6?style=flat-square&logo=typescript)
-![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-47A248?style=flat-square&logo=mongodb)
-
-</div>
+**Live:** https://your-deployment-link.com
 
 ---
 
-## 📺 Demo Video
+## Why I Built This
 
-> 🎬 **[Click here to watch the full demo video](https://github.com/user-attachments/assets/8196ac38-de07-4f96-8107-0153bf246c08)**
+Every college website I've visited has the same problem — the information is there somewhere, but finding it is painful. You either call the office (which is closed), email them (and wait 3 days), or give up.
 
-<!-- Replace the link above with your actual demo video URL (YouTube, Loom, etc.) -->
-
----
-
-## 🌐 Live Deployment
-
-> 🚀 **[https://your-deployment-link.com](https://your-deployment-link.com)**
-
-<!-- Replace with your actual deployed URL (Vercel, Render, Railway, etc.) -->
+I wanted to build something where a student could just ask "what's the fee for B.Tech CSE?" and get an accurate answer instantly. That's EduReach.
 
 ---
 
-## 📖 What Is EduReach?
+## What It Does
 
-Have you ever visited a college website and struggled to find simple answers — like fee structures, admission deadlines, or placement stats?
+There are two main AI features:
 
-**EduReach** solves this. It's a full-stack AI-powered platform that gives students instant, accurate answers about a college — 24/7.
+**Chat with the bot** — Ask anything about the college. The bot searches a knowledge base I created with all the college info (fees, courses, placements, hostel details, etc.) and gives you a grounded answer. It doesn't hallucinate because it's pulling from real data, not making things up.
 
-### The Problem
-| What Students Do Now | The Problem |
-|---|---|
-| Browse college websites | Information overload, hard to find specifics |
-| Call the admissions office | Limited hours, long wait times |
-| Visit campus in person | Time-consuming, not always possible |
-| Ask friends/seniors | May not have accurate or updated info |
+**Talk to an AI counselor** — You fill in your phone number and what you want to know, and "Ava" (an AI voice agent) actually calls you on your phone and has a real conversation with you. This uses Vapi under the hood.
 
-### The Solution ✅
-EduReach provides:
-- 🤖 **Agentic RAG Chatbot** — Searches the college knowledge base and generates accurate, contextual answers
-- 📞 **AI Voice Counselor** — "Ava" calls you on the phone and answers questions in natural conversation
-- 🔐 **JWT Authentication** — Secure login/signup that gates premium features
-- 🎨 **Beautiful UI** — A stunning homepage with courses, mentors, placements, and campus life
+Both features are gated behind login — visitors can browse the homepage but need an account to access the AI features.
 
 ---
 
-## ✨ Features
+## Tech Stack
 
-### 🔐 Authentication
-- Register / Login with JWT tokens
-- Protected routes (chat & voice gated for logged-in users)
-- Password hashing with bcryptjs
-- Persistent sessions via localStorage
+**Backend** — Node.js, Express, TypeScript, MongoDB Atlas, Groq (LLaMA 3.3 70B), LangChain, JWT, Vapi
 
-### 🤖 AI Chat Agent (RAG)
-- Powered by **Groq (LLaMA 3.3 70B)** for blazing-fast responses
-- Knowledge base stored and searched via **MongoDB Atlas**
-- Retrieval-Augmented Generation (RAG) for accurate, grounded answers
-- Quick question buttons for common queries
-
-### 📞 AI Voice Agent (Vapi)
-- Outbound phone calls powered by **Vapi AI**
-- AI counselor "Ava" speaks naturally about courses, fees, placements
-- Personalized greetings with student name and preferred course
-
-### 🏠 Homepage
-| Feature | Visitor | Logged-in Student |
-|---|---|---|
-| Hero, About, Courses, Mentors | ✅ Full access | ✅ Full access |
-| Student Life, Events, Placements | ❌ Hidden | ✅ Visible |
-| AI Chat Bot | ↪ Redirects to Login | ✅ Unlimited messages |
-| AI Voice Call | ↪ Redirects to Login | ✅ Call popup |
-| Signup Popup | Auto-appears at Mentors | ❌ Never appears |
+**Frontend** — React, TypeScript, Vite, Tailwind CSS, Axios, React Router
 
 ---
 
-## 🛠️ Tech Stack
+## How the AI Chat Works (RAG)
 
-### Backend
-| Technology | Purpose |
-|---|---|
-| Node.js v25 + Express | REST API server |
-| TypeScript | Type safety |
-| MongoDB Atlas | Database (users + knowledge base) |
-| Mongoose | ODM for user data |
-| Groq SDK (LLaMA 3.3 70B) | AI chat responses |
-| LangChain | RAG pipeline (document loading, splitting) |
-| JWT + bcryptjs | Authentication & password hashing |
-| Vapi API | AI voice calls |
+The bot uses RAG (Retrieval-Augmented Generation). Here's the basic idea:
 
-### Frontend
-| Technology | Purpose |
-|---|---|
-| React 18 + TypeScript | UI framework |
-| Vite | Build tool & dev server |
-| Tailwind CSS v4 | Styling with custom maroon/cream theme |
-| Axios | HTTP client with JWT interceptor |
-| React Router DOM | Client-side routing |
-| Lucide React | Icons |
-| React Hot Toast | Notifications |
+1. I wrote a text file with all the college info
+2. When the server starts, it splits that file into chunks and stores them in MongoDB
+3. When a student asks a question, it finds the 3 most relevant chunks and sends them along with the question to LLaMA
+4. LLaMA generates an answer based on that context
+
+This way the bot only answers from actual college data — no hallucinations.
 
 ---
 
-## 🏗️ System Architecture
+## Running Locally
 
-```
-┌─────────────────────────────────────────────────────────┐
-│                   FRONTEND (React + TS)                  │
-│                                                          │
-│  Homepage  │  Login/Signup  │  ChatDrawer  │  CallPopup │
-│                        │                                 │
-│              Axios (JWT interceptor)                     │
-└────────────────────────┬────────────────────────────────┘
-                         │
-┌────────────────────────▼────────────────────────────────┐
-│                  BACKEND (Express + TS)                  │
-│                                                          │
-│  POST /api/auth/register   POST /api/auth/login          │
-│  GET  /api/auth/me         POST /api/chat/message        │
-│  POST /api/vapi/call                                     │
-│                        │                                 │
-│         ┌──────────────┼──────────────┐                  │
-│         ▼              ▼              ▼                  │
-│    MongoDB Atlas    Groq API       Vapi API              │
-│  (users + chunks)  (LLaMA 3.3)   (voice calls)          │
-└─────────────────────────────────────────────────────────┘
-```
-
----
-
-## 🚀 Getting Started
-
-### Prerequisites
-- Node.js v24+ 
-- MongoDB Atlas account (free tier)
-- Groq API key (free) — [console.groq.com](https://console.groq.com)
-- Vapi API key (optional, for voice calls) — [vapi.ai](https://vapi.ai)
-
-### 1. Clone the Repository
 ```bash
 git clone https://github.com/yandamurividyasagar-dev/EduReachCollegeChatBot.git
 cd EduReachCollegeChatBot
 ```
 
-### 2. Setup the Backend
+**Backend:**
 ```bash
 cd server
 npm install
 ```
 
-Create a `.env` file in the `server/` folder:
-```env
+Create `server/.env`:
+```
 PORT=5000
-MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/edureach_chatbot
-JWT_SECRET=your_jwt_secret_here
+MONGODB_URI=your_mongodb_uri
+JWT_SECRET=your_secret
 JWT_EXPIRES_IN=7d
 CLIENT_URL=http://localhost:5173
-GROQ_API_KEY=your_groq_api_key_here
-
-# Optional — for AI voice calls
-VAPI_API_KEY=your_vapi_api_key_here
-VAPI_ASSISTANT_ID=your_vapi_assistant_id_here
-VAPI_PHONE_NUMBER_ID=your_vapi_phone_number_id_here
+GROQ_API_KEY=your_groq_key
+VAPI_API_KEY=your_vapi_key
+VAPI_ASSISTANT_ID=your_assistant_id
+VAPI_PHONE_NUMBER_ID=your_phone_number_id
 ```
 
-Start the backend:
 ```bash
 npm run dev
 ```
 
-### 3. Setup the Frontend
+**Frontend:**
 ```bash
 cd ../client
 npm install
 npm run dev
 ```
 
-### 4. Open the App
-Visit **[http://localhost:5173](http://localhost:5173)** 🎉
+Open `http://localhost:5173`
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 EduReachCollegeChatBot/
-├── client/                          # React Frontend
+├── client/
 │   └── src/
-│       ├── components/              # UI Components
-│       │   ├── ChatDrawer.tsx       # Chat interface
-│       │   ├── FloatingChatButton.tsx
-│       │   ├── CallPopup.tsx        # Voice call UI
-│       │   ├── Navbar.tsx
-│       │   ├── HeroSection.tsx
-│       │   └── ...more components
-│       ├── pages/
-│       │   ├── HomePage.tsx
-│       │   ├── LoginPage.tsx
-│       │   └── SignupPage.tsx
-│       ├── context/
-│       │   └── AuthContext.tsx      # Global auth state
-│       ├── services/
-│       │   ├── api.ts               # Axios instance
-│       │   ├── auth.service.ts
-│       │   ├── chat.service.ts
-│       │   └── vapi.service.ts
-│       └── data/
-│           └── content.ts           # All static content
+│       ├── components/     # All UI components
+│       ├── pages/          # HomePage, LoginPage, SignupPage
+│       ├── context/        # AuthContext
+│       ├── services/       # API calls
+│       └── data/           # Static content
 │
-└── server/                          # Express Backend
-    ├── knowledge-base/
-    │   └── edureach-knowledge.txt   # College info for RAG
+└── server/
+    ├── knowledge-base/     # College info text file
     └── src/
-        ├── config/
-        │   └── database.config.ts
-        ├── controllers/
-        │   ├── auth.controller.ts
-        │   ├── chat.controller.ts
-        │   └── vapi.controller.ts
-        ├── services/
-        │   ├── rag.service.ts       # RAG pipeline
-        │   └── vapi.service.ts
-        ├── middleware/
-        │   └── auth.middleware.ts
-        ├── models/
-        │   └── user.model.ts
-        └── routes/
-            ├── auth.routes.ts
-            ├── chat.routes.ts
-            └── vapi.routes.ts
+        ├── controllers/    # auth, chat, vapi
+        ├── services/       # rag.service, vapi.service
+        ├── middleware/     # auth middleware
+        ├── models/         # User model
+        └── routes/         # auth, chat, vapi routes
 ```
 
 ---
 
-## 🧠 How RAG Works in EduReach
+## API Routes
 
-```
-INDEXING (runs once at startup):
-  Load .txt → Split into chunks → Store in MongoDB
-
-QUERYING (every chat message):
-  User question → Find 3 relevant chunks → Send to LLaMA → Answer
-```
-
-| Step | What Happens |
-|---|---|
-| **Load** | Read `edureach-knowledge.txt` |
-| **Split** | Break into ~1000 char chunks (200 overlap) |
-| **Store** | Save chunks to MongoDB `knowledge_base` collection |
-| **Retrieve** | Find top 3 most relevant chunks for each query |
-| **Generate** | LLaMA 3.3 70B generates answer using retrieved context |
+| Method | Route | Auth | What it does |
+|--------|-------|------|--------------|
+| POST | `/api/auth/register` | No | Create account |
+| POST | `/api/auth/login` | No | Login |
+| GET | `/api/auth/me` | Yes | Get current user |
+| POST | `/api/chat/message` | No | Send chat message |
+| POST | `/api/vapi/call` | Yes | Start AI voice call |
 
 ---
 
-## 🔌 API Endpoints
+## Things I Learned Building This
 
-| Method | Endpoint | Auth | Description |
-|---|---|---|---|
-| POST | `/api/auth/register` | Public | Create account |
-| POST | `/api/auth/login` | Public | Login + get JWT |
-| GET | `/api/auth/me` | 🔒 Protected | Get current user |
-| POST | `/api/chat/message` | Public | Send chat message |
-| POST | `/api/vapi/call` | 🔒 Protected | Start AI voice call |
+- RAG is genuinely useful when you need an AI to answer from your own data instead of hallucinating
+- Embedding models and vector search are simpler to use than I expected once you understand the concept
+- Building voice AI features (Vapi) is surprisingly straightforward — most of the complexity is in the UX, not the integration
+- JWT auth across frontend and backend requires careful handling of token storage and interceptors
 
 ---
 
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
----
-
-## 📄 License
-
-This project is licensed under the MIT License.
-
----
-
-## 👨‍💻 Author
-
-**Yandamuri Vidya Sagar**
-
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0077B5?style=flat-square&logo=linkedin)](https://linkedin.com/in/your-profile)
-[![GitHub](https://img.shields.io/badge/GitHub-Follow-181717?style=flat-square&logo=github)](https://github.com/yandamurividyasagar-dev)
-
----
-
-<div align="center">
-
-⭐ **Star this repo if you found it helpful!** ⭐
-
-Made with ❤️ using React, Node.js, LangChain & Groq
-
-</div>
+Built by Yandamuri Vidya Sagar
