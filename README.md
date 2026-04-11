@@ -7,7 +7,7 @@
 **Your Gateway to Smarter Education Decisions**
 
 [![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-Visit_Site-7B1E2B?style=for-the-badge)](https://your-deployment-link.com)
-[![Demo Video](https://img.shields.io/badge/▶_Demo_Video-Watch_Now-FF0000?style=for-the-badge)](https://your-demo-video-link.com)
+[![Demo Video](https://img.shields.io/badge/▶_Demo_Video-Watch_Now-FF0000?style=for-the-badge)](https://github.com/user-attachments/assets/8196ac38-de07-4f96-8107-0153bf246c08)
 [![GitHub](https://img.shields.io/badge/GitHub-Source_Code-181717?style=for-the-badge&logo=github)](https://github.com/yandamurividyasagar-dev/EduReachCollegeChatBot)
 
 ![Node.js](https://img.shields.io/badge/Node.js-v25-339933?style=flat-square&logo=node.js)
@@ -21,7 +21,7 @@
 
 ## 📺 Demo Video
 
-> 🎬 **[Click here to watch the full demo video](https://your-demo-video-link.com)**
+> 🎬 **[Click here to watch the full demo video](https://github.com/user-attachments/assets/8196ac38-de07-4f96-8107-0153bf246c08)**
 
 <!-- Replace the link above with your actual demo video URL (YouTube, Loom, etc.) -->
 
