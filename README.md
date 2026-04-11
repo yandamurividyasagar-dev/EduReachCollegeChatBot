@@ -2,7 +2,7 @@
 
 A full-stack AI web app where students can chat with a bot or get an actual phone call from an AI counselor to learn about a college — fees, courses, admissions, placements — instantly, without hunting through pages.
 
-**Live:** https://your-deployment-link.com  
+**Live:** https://edureachcollegechatbot-2.onrender.com  
 **Repo:** https://github.com/yandamurividyasagar-dev/EduReachCollegeChatBot
 
 ## Demo
